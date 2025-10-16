@@ -1,6 +1,8 @@
 package com.inventory_service.controller;
 
 import com.inventory_service.client.dto.ProductResponse;
+import com.inventory_service.dto.BuyRequest;
+import com.inventory_service.dto.BuyResponse;
 import com.inventory_service.dto.UpdateQuantityRequest;
 import com.inventory_service.service.InventoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -83,6 +86,26 @@ public class InventoryController {
             @Valid @RequestBody UpdateQuantityRequest request) {
         Integer updated = inventoryService.updateAvailableQuantity(productId, request.getCantidad());
         return ResponseEntity.ok(updated);
+    }
+
+    /**
+     * Procesa una compra de producto.
+     * Permite a los clientes comprar productos verificando la disponibilidad
+     * en inventario y actualizando las cantidades disponibles tras la compra.
+     * Retorna información detallada de la transacción realizada.
+     */
+    @Operation(summary = "Procesa una compra de producto")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Compra realizada exitosamente",
+                    content = @Content(schema = @Schema(implementation = BuyResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Inventario insuficiente para realizar la compra solicitada"),
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado o eliminado")
+    })
+    @PostMapping("/buy")
+    public ResponseEntity<BuyResponse> buyProduct(
+            @Valid @RequestBody BuyRequest request) {
+        BuyResponse response = inventoryService.buyProduct(request);
+        return ResponseEntity.ok(response);
     }
 }
 

@@ -1,6 +1,8 @@
 package com.inventory_service.service;
 
 import com.inventory_service.client.dto.ProductResponse;
+import com.inventory_service.dto.BuyRequest;
+import com.inventory_service.dto.BuyResponse;
 
 /**
  * Servicio de dominio para operaciones de inventario.
@@ -33,6 +35,18 @@ public interface InventoryService {
      * @return cantidad actualizada
      */
     Integer updateAvailableQuantity(Long productId, Integer cantidad);
+
+    /**
+     * Procesa una compra de producto.
+     * Verifica la disponibilidad del producto en el inventario y actualiza las cantidades
+     * disponibles tras una compra exitosa. Valida que el producto existe y no está eliminado.
+     *
+     * @param request solicitud de compra que contiene el ID del producto y la cantidad a comprar
+     * @return información detallada de la compra realizada incluyendo totales y cantidades restantes
+     * @throws com.inventory_service.exception.NotFoundException si el producto no existe o está eliminado
+     * @throws com.inventory_service.exception.BadRequestException si no hay inventario suficiente para la compra
+     */
+    BuyResponse buyProduct(BuyRequest request);
 }
 
 
