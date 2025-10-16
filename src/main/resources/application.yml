@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: product-service
+    name: inventory-service
   datasource:
     url: ${db_url}
     username: ${db_user}
@@ -12,6 +12,23 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 2000
+            readTimeout: 3000
+            loggerLevel: basic
+            retry-period: 100
+            retry-max-period: 1000
+            retry-max-attempts: 3
 
 api:
   key: ${api_key}
+
+products:
+  service:
+    url: ${url_service}
+  api:
+    key: ${api-key-product}
