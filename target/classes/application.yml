@@ -12,6 +12,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+
   cloud:
     openfeign:
       client:
@@ -31,4 +38,4 @@ products:
   service:
     url: ${url_service}
   api:
-    key: ${api-key-product}
+    key: ${api_key_product}
