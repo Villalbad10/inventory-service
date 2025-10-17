@@ -1,0 +1,36 @@
+server:
+  port: 0  # Random port for testing
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+
+products:
+  service:
+    url: http://localhost:8080
+  api:
+    key: test-product-api-key-67890
+
+# API Key for testing
+api:
+  key: test-api-key-12345
+
+logging:
+  level:
+    com.inventory_service: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
