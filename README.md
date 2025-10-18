@@ -47,7 +47,7 @@ export url_service=http://product-service:8080
 
 1. **Clonar el repositorio:**
 ```bash
-git clone <repository-url>
+git clone https://github.com/Villalbad10/inventory-service
 cd inventory-service
 ```
 
@@ -470,7 +470,7 @@ La decisión de implementar el endpoint de compra en el Inventory Service se jus
 - **Versión:** 0.0.1-SNAPSHOT
 - **Fecha:** Octubre 2025
 - **Tecnologías:** Spring Boot 3.5.6, Java 21, PostgreSQL, Docker
-- **Licencia:** [Especificar licencia]
+
 
 ## Contacto
 
